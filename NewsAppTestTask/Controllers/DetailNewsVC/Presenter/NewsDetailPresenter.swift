@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NewsDetailView: AnyObject {
-    func showArticle(_ article: Article)
+    func showArticle(_ article: News)
     func showFavoriteButton(_ isFavorite: Bool)
 }
 
@@ -17,12 +17,12 @@ final class NewsDetailPresenter {
     // MARK: - Property
     
     weak var view: NewsDetailView?
-    private let article: Article
+    private let article: News
     private var isFavorite: Bool = false
     
     // MARK: - Init
     
-    init(article: Article) {
+    init(article: News) {
         self.article = article
     }
     

@@ -5,13 +5,13 @@
 //  Created by Артем Орлов on 27.04.2023.
 //
 
-struct ArticleResponse: Codable {
+struct NewsResponse: Codable {
     let status: String
     let totalResults: Int
-    let articles: [Article]
+    let articles: [News]
 }
 
-struct Article: Codable {
+struct News: Codable {
     let title: String
     let author: String?
     let description: String?
@@ -20,8 +20,8 @@ struct Article: Codable {
     let publishedAt: String?
 }
 
-extension Article: Equatable {
-    static func == (lhs: Article, rhs: Article) -> Bool {
+extension News: Equatable {
+    static func == (lhs: News, rhs: News) -> Bool {
         return lhs.title == rhs.title &&
                lhs.author == rhs.author &&
                lhs.description == rhs.description &&

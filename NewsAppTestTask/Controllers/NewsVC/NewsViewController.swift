@@ -108,7 +108,7 @@ extension NewsViewController {
 // MARK: - ArticleViewProtocol
 
 extension NewsViewController:  NewsView {
-    func setArticles(_ articles: [Article]) {
+    func setArticles(_ articles: [News]) {
         DispatchQueue.main.async {
             self.articlePresenter.articles = articles
             self.tableView.reloadData()

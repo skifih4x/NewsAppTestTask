@@ -9,7 +9,7 @@ final class ArticleViewImplementation:  NewsView {
     
     weak var delegate:  NewsView?
 
-    func setArticles(_ articles: [Article]) {
+    func setArticles(_ articles: [News]) {
         delegate?.setArticles(articles)
     }
 

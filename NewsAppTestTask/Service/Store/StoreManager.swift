@@ -10,13 +10,13 @@ import Foundation
 class FavoritesManager {
     
     static let shared = FavoritesManager()
-    private var favorites: [Article] = []
+    private var favorites: [News] = []
     
     init() {
         loadFavorites()
     }
     
-    func addToFavorites(_ article: Article) {
+    func addToFavorites(_ article: News) {
         if !isFavorite(article) {
             favorites.append(article)
             saveFavorites()
@@ -24,33 +24,46 @@ class FavoritesManager {
     }
     
     private func saveFavorites() {
-        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("favorites")
-        let data = try! JSONEncoder().encode(favorites)
-        try! data.write(to: fileURL)
-        print(fileURL)
-    }
-    
-    private func loadFavorites() {
-        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("favorites")
-        let data = try? Data(contentsOf: fileURL)
-        if let data = data, let articles = try? JSONDecoder().decode([Article].self, from: data) {
-            favorites = articles
-            print(favorites)
+        guard let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("favorites") else {
+            return
+        }
+        do {
+            let data = try JSONEncoder().encode(favorites)
+            try data.write(to: fileURL)
+            print(fileURL)
+        } catch {
+            print("Error saving favorites: \(error.localizedDescription)")
         }
     }
+
+    private func loadFavorites() {
+        guard let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("favorites") else {
+            return
+        }
+        do {
+            let data = try Data(contentsOf: fileURL)
+            if let articles = try? JSONDecoder().decode([News].self, from: data) {
+                favorites = articles
+                print(favorites)
+            }
+        } catch {
+            print("Error loading favorites: \(error.localizedDescription)")
+        }
+    }
+
     
-    func isFavorite(_ article: Article) -> Bool {
+    func isFavorite(_ article: News) -> Bool {
         return favorites.contains(where: { $0.title == article.title })
     }
 
-    func removeFromFavorites(_ article: Article) {
+    func removeFromFavorites(_ article: News) {
         if let index = favorites.firstIndex(where: { $0.title == article.title }) {
             favorites.remove(at: index)
             saveFavorites()
         }
     }
     
-    func getFavorites() -> [Article] {
+    func getFavorites() -> [News] {
         return favorites
     }
 }

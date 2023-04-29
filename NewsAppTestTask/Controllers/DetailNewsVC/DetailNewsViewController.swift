@@ -55,7 +55,7 @@ final class DetailNewsViewController: UIViewController {
     
     // MARK: - Init
     
-    init(article: Article) {
+    init(article: News) {
         self.presenter = NewsDetailPresenter(article: article)
         super.init(nibName: nil, bundle: nil)
         presenter.view = self
@@ -87,7 +87,7 @@ final class DetailNewsViewController: UIViewController {
 
 extension DetailNewsViewController: NewsDetailView {
     
-    func showArticle(_ article: Article) {
+    func showArticle(_ article: News) {
         articleTitleLabel.text = article.title
         articleAuthorLabel.text = "By: \(article.author ?? "No author")"
         articleDescriptionLabel.text = article.description

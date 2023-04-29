@@ -60,7 +60,7 @@ extension FavoritesNewsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! NewsCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? NewsCell else { return UITableViewCell()}
         let article = presenter.favorites[indexPath.row]
         cell.configure(with: article)
         return cell
@@ -72,7 +72,7 @@ extension FavoritesNewsViewController: UITableViewDataSource {
 
 extension FavoritesNewsViewController: FavoritesView {
     
-    func showFavorites(_ favorites: [Article]) {
+    func showFavorites(_ favorites: [News]) {
         self.presenter.favorites = favorites
         tableView.reloadData()
     }

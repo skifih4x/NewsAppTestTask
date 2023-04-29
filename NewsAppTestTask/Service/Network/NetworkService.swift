@@ -16,7 +16,7 @@ final class NetworkService {
     
     private let apiKey = "ae7ec2d4e3664bf3bd4d73ebca4f516f"
     
-    func fetchArticles(page: Int, completion: @escaping (Result<ArticleResponse, Error>) -> Void) {
+    func fetchArticles(page: Int, completion: @escaping (Result<NewsResponse, Error>) -> Void) {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "newsapi.org"
@@ -45,7 +45,7 @@ final class NetworkService {
             
             do {
                 let decoder = JSONDecoder()
-                let response = try decoder.decode(ArticleResponse.self, from: data)
+                let response = try decoder.decode(NewsResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(response))
                 }

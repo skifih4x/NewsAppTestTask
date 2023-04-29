@@ -62,7 +62,7 @@ final class NewsCell: UITableViewCell {
     
     // MARK: - Methods
     
-    func configure(with model: Article) {
+    func configure(with model: News) {
         titleLabel.text = model.title
         authorLabel.text = model.author
         dateLabel.text = formatDate(from: model.publishedAt)

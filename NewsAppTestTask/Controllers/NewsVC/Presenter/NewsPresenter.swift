@@ -8,7 +8,7 @@
 import Foundation
 
 protocol  NewsView: AnyObject {
-    func setArticles(_ articles: [Article])
+    func setArticles(_ articles: [News])
     func showError(_ error: Error)
 }
 
@@ -20,7 +20,7 @@ final class NewsPresenter {
     private var currentPage = 1
     private var totalPage = 1
     private var isLoading = false
-    var articles: [Article] = []
+    var articles: [News] = []
     
     init(view:  NewsView) {
         self.view = view
