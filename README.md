@@ -8,7 +8,7 @@
 - UITableView
 - UITabBarController
 - DateFormater
-- UIImageView локлаьное хранение картинок
+- UIImageView использовал кэширование картинок
 - FileManager для добавления в избранное
 - Смена темы
 
